@@ -1,0 +1,23 @@
+.panel_container{
+	width: 800px;
+	height: 600px;
+	border: #000 1px solid;
+	margin: 50px auto;
+	overflow: hidden;
+	position: relative;
+}
+
+.btn_container,
+.container_btn_redimensionar{
+	width: 600px;
+	margin: 20px auto;
+	text-align: center;
+}
+
+.btn_container li{
+	display: inline-block;
+}
+
+.btn_container li:after{
+	content: " | ";
+}
