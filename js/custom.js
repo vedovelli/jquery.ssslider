@@ -35,7 +35,7 @@ jQuery(document).ready(function($){
 
 	/* Caso nada seja passado no construtor, ele coloca 'from_left' como padrão */ 
 	container.ssslider({
-		orientation:'from_top'
+		orientation:'from_right'
 	});
 
 });

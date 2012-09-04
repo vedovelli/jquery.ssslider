@@ -1,6 +1,6 @@
 ;(function($){
 
-	var _container, _children, _slider, _index, _orientation = 'from_left';
+	var _container, _children, _slider, _index, _slider_top, _slider_left, _orientation = 'from_left';
 
 	var methods = {
 
@@ -16,7 +16,7 @@
 				'left': 0,
 				'top': 0,
 			});
-			methods['resize'].apply();
+			methods.resize();
 			_container.html( _slider.html(_children) );
 			return _container;
 		},
@@ -29,14 +29,17 @@
 				'height': _container.css('height')
 			});
 			if(_orientation === 'from_top'){
-				// reverter o array _children e iniciar do final com top positivo no tamanho do slider
 				_children = $(_children.get().reverse());
 				_slider.css({
 					'height': ( _container.css('height').replace('px','') * _children.length ) + 'px',
-					'top': -(_index*_container.css('height').replace('px',''))
+					'top': -( (_container.css('height').replace('px','') * _children.length) - _container.css('height').replace('px','') ) + 'px'
 				});
 			} else if(_orientation === 'from_right'){
-				// Iniciar do final com left positivo do tamanho do slides
+				_children = $(_children.get().reverse());
+				_slider.css({
+					'width': ( _container.css('width').replace('px','') * _children.length ) + 'px',
+					'left': -( (_container.css('width').replace('px','') * _children.length) - _container.css('width').replace('px','') ) + 'px'
+				});
 			} else if(_orientation === 'from_bottom'){
 				_slider.css({
 					'height': ( _container.css('height').replace('px','') * _children.length ) + 'px',
@@ -50,23 +53,28 @@
 			} else {
 				$.error( 'Informação de orientação desconhecida. Valores esperados: "from_top", "from_right", "from_bottom" ou "from_left".' );		
 			}
+			_slider_top = parseInt(_slider.css('top').replace('px',''));
+			_slider_left = parseInt(_slider.css('left').replace('px',''));
 			return _container;
 		},
 
 		navigate: function(index){
+			var container_width, container_height, slider_top;
 			if(_container){
 				if(index < 0 || index > (_children.length-1)){
 					$.error( 'Index fora do range' );	
 				} else {
 					_index = index;
+					container_width = parseInt(_container.css('width').replace('px',''));
+					container_height = parseInt(_container.css('height').replace('px',''));
 					if(_orientation === 'from_top'){
-						// reverter o array _children e iniciar do final com top positivo no tamanho do slider
+						_slider.animate({'top': _slider_top + (_index * container_height)});
 					} else if(_orientation === 'from_right'){
-						// Iniciar do final com left positivo do tamanho do slides
+						_slider.animate({'left': _slider_left + (_index * container_width)});
 					} else if(_orientation === 'from_bottom'){
-						_slider.animate({'top': -(_index*_container.css('height').replace('px',''))});
+						_slider.animate({'top': -(_index*container_height)});
 					} else if(_orientation === 'from_left'){
-						_slider.animate({'left': -(_index*_container.css('width').replace('px',''))});
+						_slider.animate({'left': -(_index*container_width)});
 					} else {
 						$.error( 'Informação de orientação desconhecida. Valores esperados: "from_top", "from_right", "from_bottom" ou "from_left".' );		
 					}
