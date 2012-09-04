@@ -22,9 +22,10 @@
 		},
 
 		resize: function(){
-			var container_width, container_height;
-			container_width = parseInt(_container.css('width').replace('px',''));
-			container_height = parseInt(_container.css('height').replace('px',''));
+			var 
+				container_width = parseInt(_container.css('width').replace('px','')),
+				container_height = parseInt(_container.css('height').replace('px',''))
+			;
 			_children.css({
 				'float': 'left',
 				'overflow': 'auto',
