@@ -35,10 +35,9 @@
 					'top': -( (_container.css('height').replace('px','') * _children.length) - _container.css('height').replace('px','') ) + 'px'
 				});
 			} else if(_orientation === 'from_right'){
-				_children = $(_children.get().reverse());
 				_slider.css({
 					'width': ( _container.css('width').replace('px','') * _children.length ) + 'px',
-					'left': -( (_container.css('width').replace('px','') * _children.length) - _container.css('width').replace('px','') ) + 'px'
+					'right': -( (_container.css('width').replace('px','') * _children.length) - _container.css('width').replace('px','') ) + 'px'
 				});
 			} else if(_orientation === 'from_bottom'){
 				_slider.css({
@@ -70,11 +69,11 @@
 					if(_orientation === 'from_top'){
 						_slider.animate({'top': _slider_top + (_index * container_height)});
 					} else if(_orientation === 'from_right'){
-						_slider.animate({'left': _slider_left + (_index * container_width)});
+						_slider.animate({'left': -(container_width*_index)});
 					} else if(_orientation === 'from_bottom'){
 						_slider.animate({'top': -(_index*container_height)});
 					} else if(_orientation === 'from_left'){
-						_slider.animate({'left': -(_index*container_width)});
+						_slider.animate({'left': _slider_left - (_index * container_width)});						
 					} else {
 						$.error( 'Informação de orientação desconhecida. Valores esperados: "from_top", "from_right", "from_bottom" ou "from_left".' );		
 					}
