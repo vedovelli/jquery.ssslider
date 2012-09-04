@@ -5,14 +5,17 @@
 	margin: 50px auto;
 	overflow: hidden;
 	position: relative;
+}
+
+.panel_container p{
 	color: #fff;
 	font-size: 220px;
-	line-height: 270%;
+	margin-top: 10%;
 	text-align: center;
 }
 
 .btn_container,
-.container_btn_redimensionar{
+.container_btn_resize{
 	width: 600px;
 	margin: 20px auto;
 	text-align: center;

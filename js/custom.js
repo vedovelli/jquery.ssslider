@@ -1,12 +1,12 @@
 jQuery(document).ready(function($){
 
 	var 
-		container = $('.panel_container'),
-		btn_container = $('.btn_container'),
-		nav_array = $('.nav'),
+		container 		= $('.panel_container'),
+		btn_container 	= $('.btn_container'),
+		nav_array 		= $('.nav'),
 		prev 			= $('.prev'),
 		next 			= $('.next'),
-		redimensionar = $('.container_btn_redimensionar').find('button');
+		resize 			= $('.container_btn_resize').find('button');
 	;
 
 	btn_container.on('click', '.nav', function(event){
@@ -25,7 +25,7 @@ jQuery(document).ready(function($){
 		container.ssslider('next');
 	});
 
-	redimensionar.on('click', function(){
+	resize.on('click', function(){
 		container.css({
 			'width':'200px',
 			'height':'500px'
@@ -33,9 +33,10 @@ jQuery(document).ready(function($){
 		container.ssslider('resize');
 	});
 
-	/* Caso nada seja passado no construtor, ele coloca 'from_left' como padrão */ 
-	container.ssslider({
-		orientation:'from_bottom'
-	});
+	/* Slider initialization.
+	 * Default orientation is "from_left".
+	 * Try the other 3 possible values: "from_right", "from_top" and "from_bottom"
+	 */ 
+	container.ssslider();
 
 });
