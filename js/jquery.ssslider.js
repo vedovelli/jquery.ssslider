@@ -66,35 +66,24 @@
 			}
 		},
 		
-		next: function()
-		{
+		next: function(){
 			if(!_container && !_children) return false;
-
-			if( _index > -1 && _index < (_children.length-1) )
-			{
+			if( _index > -1 && _index < (_children.length-1) ){
 				methods.navigate(_index+1)
-			}
-			else
-			{
+			} else {
 				methods.navigate(0);
 			}
 		},
 
-		prev: function()
-		{
+		prev: function(){
 			if(!_container && !_children) return false;
-
-			if( _index > 0 && _index < (_children.length-1) )
-			{
+			if(_index > 0 && _index < _children.length){
 				methods.navigate(_index-1)
-			}
-			else
-			{
-				methods.navigate((_children.length-1));
+			} else {
+				methods.navigate(_children.length-1);
 			}
 		}
-	}
-	;
+	};
 
 	$.fn.ssslider = function(method){
 		if ( methods[method] ) { // Caso um metodo tenha sido passado, executa-o
