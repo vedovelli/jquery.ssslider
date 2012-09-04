@@ -1,6 +1,6 @@
 ;(function($){
 
-	var _container, _children, _slider, _index = 0, _orientation = 'horizontal';
+	var _container, _children, _slider, _index, _orientation = 'from_left';
 
 	var methods = {
 
@@ -22,25 +22,34 @@
 		},
 
 		resize: function(){
-			if(_orientation === 'horizontal'){
-				_slider.css({
-					'width': ( _container.css('width').replace('px','') * _children.length ) + 'px',
-					'left': -(_index*_container.css('width').replace('px',''))
-				});
-			} else if(_orientation === 'vertical'){
-				_slider.css({
-					'height': ( _container.css('height').replace('px','') * _children.length ) + 'px',
-					'top': -(_index*_container.css('height').replace('px',''))
-				});
-			} else {
-				$.error( 'Informação de orientação desconhecida. Valores esperados: horizontal ou vertical.' );		
-			}
 			_children.css({
 				'float': 'left',
 				'overflow': 'auto',
 				'width': _container.css('width'),
 				'height': _container.css('height')
 			});
+			if(_orientation === 'from_top'){
+				// reverter o array _children e iniciar do final com top positivo no tamanho do slider
+				_children = $(_children.get().reverse());
+				_slider.css({
+					'height': ( _container.css('height').replace('px','') * _children.length ) + 'px',
+					'top': -(_index*_container.css('height').replace('px',''))
+				});
+			} else if(_orientation === 'from_right'){
+				// Iniciar do final com left positivo do tamanho do slides
+			} else if(_orientation === 'from_bottom'){
+				_slider.css({
+					'height': ( _container.css('height').replace('px','') * _children.length ) + 'px',
+					'top': -(_index*_container.css('height').replace('px',''))
+				});
+			} else if(_orientation === 'from_left'){
+				_slider.css({
+					'width': ( _container.css('width').replace('px','') * _children.length ) + 'px',
+					'left': -(_index*_container.css('width').replace('px',''))
+				});
+			} else {
+				$.error( 'Informação de orientação desconhecida. Valores esperados: "from_top", "from_right", "from_bottom" ou "from_left".' );		
+			}
 			return _container;
 		},
 
@@ -50,14 +59,16 @@
 					$.error( 'Index fora do range' );	
 				} else {
 					_index = index;
-					if(_orientation === 'horizontal'){
-						_slider.animate({'left': -(_index*_container.css('width').replace('px',''))}, function(){
-						});
-					} else if(_orientation === 'vertical'){
-						_slider.animate({'top': -(_index*_container.css('height').replace('px',''))}, function(){
-						});
+					if(_orientation === 'from_top'){
+						// reverter o array _children e iniciar do final com top positivo no tamanho do slider
+					} else if(_orientation === 'from_right'){
+						// Iniciar do final com left positivo do tamanho do slides
+					} else if(_orientation === 'from_bottom'){
+						_slider.animate({'top': -(_index*_container.css('height').replace('px',''))});
+					} else if(_orientation === 'from_left'){
+						_slider.animate({'left': -(_index*_container.css('width').replace('px',''))});
 					} else {
-						$.error( 'Informação de orientação desconhecida. Valores esperados: horizontal ou vertical.' );		
+						$.error( 'Informação de orientação desconhecida. Valores esperados: "from_top", "from_right", "from_bottom" ou "from_left".' );		
 					}
 					return _container;
 				}
