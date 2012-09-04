@@ -42,12 +42,14 @@
 					break;
 				case 'from_right':
 					_slider.css({
-						'width': ( container_width * _children.length )
+						'width': (container_width * _children.length),
+						'left': -(container_width*_index) || 0
 					});
 					break;
 				case 'from_bottom':
 					_slider.css({
-						'height': ( container_height * _children.length )
+						'height': (container_height * _children.length),
+						'top': -(_index * container_height) || 0
 					});
 					break;
 				case 'from_left':

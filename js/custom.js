@@ -38,6 +38,6 @@ jQuery(document).ready(function($){
 	 * Try the other 3 possible values: "from_right", "from_top" and "from_bottom"
 	 * Ex.: container.ssslider({orientation:'from_right'});
 	 */ 
-	container.ssslider({orientation:'from_right'});
+	container.ssslider({orientation:'from_bottom'});
 
 });
