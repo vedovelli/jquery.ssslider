@@ -21,6 +21,9 @@ jQuery(document).ready(function($){
 		container.ssslider('resize');
 	});
 
-	container.ssslider();
+	/* Caso nada seja passado no construtor, ele coloca horizontal como padrão */ 
+	container.ssslider({
+		orientation:'vertical'
+	});
 
 });
