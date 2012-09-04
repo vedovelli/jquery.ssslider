@@ -36,7 +36,8 @@ jQuery(document).ready(function($){
 	/* Slider initialization.
 	 * Default orientation is "from_left".
 	 * Try the other 3 possible values: "from_right", "from_top" and "from_bottom"
+	 * Ex.: container.ssslider({orientation:'from_right'});
 	 */ 
-	container.ssslider();
+	container.ssslider({orientation:'from_right'});
 
 });
