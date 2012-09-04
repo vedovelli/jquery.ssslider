@@ -21,9 +21,9 @@ jQuery(document).ready(function($){
 		container.ssslider('resize');
 	});
 
-	/* Caso nada seja passado no construtor, ele coloca horizontal como padrão */ 
+	/* Caso nada seja passado no construtor, ele coloca 'from_left' como padrão */ 
 	container.ssslider({
-		orientation:'vertical'
+		orientation:'from_bottom'
 	});
 
 });
