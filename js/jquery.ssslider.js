@@ -22,8 +22,19 @@
 		},
 
 		resize: function(){
+			_children.css({
+				'float': 'left',
+				'overflow': 'auto',
+				'width': _container.css('width'),
+				'height': _container.css('height')
+			});
 			if(_orientation === 'from_top'){
 				// reverter o array _children e iniciar do final com top positivo no tamanho do slider
+				_children = $(_children.get().reverse());
+				_slider.css({
+					'height': ( _container.css('height').replace('px','') * _children.length ) + 'px',
+					'top': -(_index*_container.css('height').replace('px',''))
+				});
 			} else if(_orientation === 'from_right'){
 				// Iniciar do final com left positivo do tamanho do slides
 			} else if(_orientation === 'from_bottom'){
@@ -39,12 +50,6 @@
 			} else {
 				$.error( 'Informação de orientação desconhecida. Valores esperados: "from_top", "from_right", "from_bottom" ou "from_left".' );		
 			}
-			_children.css({
-				'float': 'left',
-				'overflow': 'auto',
-				'width': _container.css('width'),
-				'height': _container.css('height')
-			});
 			return _container;
 		},
 
