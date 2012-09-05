@@ -6,6 +6,12 @@ Mais um plugin de slider? Sim! A motivação para o desenvolvimento do SSSlider 
 
 # Instruções para uso
 
+## Informação importante e licença de uso
+
+Este plugin está em ALPHA! Bugs podem ser encontrados e se vc corrigir algum, envie-nos uma mensagem. O ideal é fazer um fork no GitHub, corrigir e enviar um pull request.
+
+Quanto à licença, **ela não existe**. Vc pode fazer o que quiser com o código. Nenhum crédito é necessário. Apenas faça bom uso e se chegar a colocar no ar, mande o link para darmos uma olhada e ver se vc fez direitinho! =D
+
 ## Aplicando o plugin ao markup
 
 O plugin necessita de um markup HTML simples. Basta seguir o exemplo abaixo, estilizando de acordo com sua preferência.
