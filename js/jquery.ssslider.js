@@ -3,38 +3,44 @@
  */
 ;(function($){
 
+	// Scope variables
 	var _container, _children, _slider, _index = 0, _slider_top, _slider_left, _orientation = 'from_left';
 
+	// Plugin methods. Taken from here: http://docs.jquery.com/Plugins/Authoring#Plugin_Methods
 	var methods = {
 
+		// Plugin initialization. Mandatory!
 		init: function(orientation){
-			_container = $(this); 
-			_children = _container.children();
-			_slider = $('<div class="$slider"></div>');
-			if( typeof orientation === 'object' ){
-				_orientation = orientation.orientation;
+			_container = $(this); // Inside this anonymous function, this is an HTML fragment, not jQuery obj
+			_children = _container.children(); // Get all container's children
+			_slider = $('<div class="$slider"></div>'); // Create the slider markup to be added to container
+			if( typeof orientation === 'object' ){ // Checks if received orientation is an object
+				_orientation = orientation.orientation; // Use the received information from object
 			}
-			_slider.css({
+			_slider.css({ // Sets the base CSS for the slider
 				'position': 'absolute',
 				'left': 0,
 				'top': 0,
 			});
-			methods.resize();
-			_container.html( _slider.html(_children) );
-			return _container;
+			methods.resize(); // See next method
+			_container.html( _slider.html(_children) ); // Wraps all children (panes) inside the slider
+			return _container; // Keeps chainability
 		},
 
+		// Must be called after container resizing. Also used during initialization process
 		resize: function(){
-			var 
+			var // Holds container width and height for further use. Local variables.
 				container_width = parseInt(_container.css('width').replace('px','')),
 				container_height = parseInt(_container.css('height').replace('px',''))
 			;
-			_children.css({
+			_children.css({ // Apply proper CSS on children in order to resize them to match container's dimensions
 				'float': 'left',
 				'overflow': 'auto',
 				'width': container_width,
 				'height': container_height
 			});
+
+			// This is necessary in case of container resizing. Keeps the selected pane selected.
 			switch(_orientation){
 				case 'from_top':
 					_children = $(_children.get().reverse());
@@ -66,23 +72,27 @@
 					$.error( 'Orientation unknown. Possible values are "from_top", "from_right", "from_bottom" or "from_left"' );
 					break;
 			}
+
+			// Holds slider top and left position for further use
 			_slider_top = parseInt(_slider.css('top').replace('px',''));
 			_slider_left = parseInt(_slider.css('left').replace('px',''));
-			return _container;
+			return _container; // Keeps chainability
 		},
 
 		navigate: function(index){
-			if(!_container){
+			if(!_container){ // Error triggered if method is called before plugin initialisation
 				$.error( 'Initialization needed. Use $(<selector>).ssslider();' );
 			}
-			if(index < 0 || index > (_children.length-1)){
+			if(index < 0 || index > (_children.length-1)){ // Error triggered if the passed index is out of range
 				$.error( 'Index out of range' );	
 			} 
-			var 
+			var  // Holds container width and height for further use. Local variables.
 				container_width = parseInt(_container.css('width').replace('px','')),
 				container_height = parseInt(_container.css('height').replace('px',''))
 			;
-			_index = index;
+			_index = index; // Holds received index for further use.
+
+			// Do the proper animations
 			switch(_orientation){
 				case 'from_top':
 					_slider.animate({'top': _slider_top + (_index * container_height)});
@@ -100,37 +110,38 @@
 					$.error( 'Orientation unknown. Possible values are "from_top", "from_right", "from_bottom" or "from_left"' );
 					break;
 			}
-			return _container;
+			return _container; // Keeps chainability
 		},
 		
 		next: function(){
-			if(!_container && !_children) return false;
-			if( _index > -1 && _index < (_children.length-1) ){
+			if(!_container && !_children) return false; // Prevents method being called without plugin initialisation
+			if( _index > -1 && _index < (_children.length-1) ){ // Calculates the range to find next
 				methods.navigate(_index+1)
 			} else {
 				methods.navigate(0);
 			}
-			return _container;
+			return _container; // Keeps chainability
 		},
 
 		prev: function(){
-			if(!_container && !_children) return false;
-			if(_index > 0 && _index < _children.length){
+			if(!_container && !_children) return false; // Prevents method being called without plugin initialisation
+			if(_index > 0 && _index < _children.length){  // Calculates the range to find prev
 				methods.navigate(_index-1)
 			} else {
 				methods.navigate(_children.length-1);
 			}
-			return _container;
+			return _container; // Keeps chainability
 		}
 	};
 
-	$.fn.ssslider = function(method){
-		if ( methods[method] ) { // Caso um metodo tenha sido passado, executa-o
-			return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+	// From here: http://docs.jquery.com/Plugins/Authoring#Plugin_Methods
+	$.fn.ssslider = function(method){ // Plugin's main method
+		if ( methods[method] ) { // In case of method was passed, execute it
+			return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 )); // return in order to keep chainability
 		} else if ( typeof method === 'object' || ! method ) {
-			return methods.init.apply( this, arguments ); // Caso contrário, executa o método init
+			return methods.init.apply( this, arguments ); // If no method was passed, execute init. Return in order to keep chainability
 		} else {
-			$.error( 'Method ' +  method + ' unknown' );
+			$.error( 'Method ' +  method + ' unknown' ); // Error triggered if none of the above happened
 		}    
 	}
 
