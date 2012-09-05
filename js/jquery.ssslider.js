@@ -110,6 +110,7 @@
 			} else {
 				methods.navigate(0);
 			}
+			return _container;
 		},
 
 		prev: function(){
@@ -119,6 +120,7 @@
 			} else {
 				methods.navigate(_children.length-1);
 			}
+			return _container;
 		}
 	};
 
