@@ -2,26 +2,28 @@ jQuery(document).ready(function($){
 
 	var 
 		container 		= $('.panel_container'),
-		btn_container 	= $('.btn_container'),
-		nav_array 		= $('.nav'),
+		btn_group 		= $('.btn-group'),
+		nav_array 		= $('.navigation'),
+		ori_array 		= $('.orientation'),
 		prev 			= $('.prev'),
 		next 			= $('.next'),
 		resize 			= $('.container_btn_resize').find('button');
 	;
 
-	btn_container.on('click', '.nav', function(event){
-		event.preventDefault();
+	btn_group.on('click', '.navigation', function(){
 		index = nav_array.index(this);
 		container.ssslider('navigate', index);	
 	});
 
-	prev.on('click', function(event){
-		event.preventDefault();
+	btn_group.on('click', '.orientation', function(){
+		container.ssslider('change_orientation', {'orientation': $(this).text()});
+	});
+
+	prev.on('click', function(){
 		container.ssslider('prev');
 	});
 
-	next.on('click', function(event){
-		event.preventDefault();
+	next.on('click', function(){
 		container.ssslider('next');
 	});
 
@@ -38,6 +40,8 @@ jQuery(document).ready(function($){
 	 * Try the other 3 possible values: "from_right", "from_top" and "from_bottom"
 	 * Ex.: container.ssslider({orientation:'from_right'});
 	 */ 
-	container.ssslider({orientation:'from_bottom'});
+	container.ssslider({orientation:'from_right'});
+
+	$('.btn-group').button();
 
 });

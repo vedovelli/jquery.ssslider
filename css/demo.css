@@ -1,30 +1,41 @@
+body{
+	height: 100%;
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(211,211,211,0.65) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(211,211,211,0.65))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(211,211,211,0.65) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(211,211,211,0.65) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(211,211,211,0.65) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(211,211,211,0.65) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6d3d3d3',GradientType=0 ); /* IE6-9 */
+}
+
 .panel_container{
-	width: 800px;
-	height: 600px;
+	width: 600px;
+	height: 300px;
 	border: #000 1px solid;
 	margin: 50px auto;
 	overflow: hidden;
 	position: relative;
+	background-color: #fff;
 }
 
 .panel_container p{
-	color: #fff;
-	font-size: 220px;
-	margin-top: 10%;
-	text-align: center;
+	padding: 10px;
 }
 
-.btn_container,
+.panel_container h4{
+	padding-left: 10px;
+}
+
+h1,
+.apresentacao,
+.btn-group,
 .container_btn_resize{
 	width: 600px;
-	margin: 20px auto;
+	margin: 20px auto !important;
 	text-align: center;
 }
 
-.btn_container li{
-	display: inline-block;
-}
-
-.btn_container li:after{
-	content: " | ";
+.apresentacao{
+	text-align: left;
 }
