@@ -1,3 +1,6 @@
+/*
+ * https://github.com/vedovelli/jquery.ssslider
+ */
 ;(function($){
 
 	var _container, _children, _slider, _index, _slider_top, _slider_left, _orientation = 'from_left';
