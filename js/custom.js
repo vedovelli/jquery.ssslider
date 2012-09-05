@@ -11,7 +11,7 @@ jQuery(document).ready(function($){
 
 	btn_container.on('click', '.nav', function(event){
 		event.preventDefault();
-		index = nav_array.index(this);
+		index = nav_array.index(this); // Obtem o index do <li> clicado
 		container.ssslider('navigate', index);	
 	});
 
