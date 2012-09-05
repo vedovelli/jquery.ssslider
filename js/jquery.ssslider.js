@@ -3,7 +3,7 @@
  */
 ;(function($){
 
-	var _container, _children, _slider, _index, _slider_top, _slider_left, _orientation = 'from_left';
+	var _container, _children, _slider, _index = 0, _slider_top, _slider_left, _orientation = 'from_left';
 
 	var methods = {
 
