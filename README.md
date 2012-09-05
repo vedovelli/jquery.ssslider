@@ -87,6 +87,6 @@ Um exemplo pode ser encontrado na [seguinte URL](http://blog.vedovelli.com.br/ss
 
 **RIA Labs Desenvolvimento**
 
-## Chagelog
+## Changelog
 
 - [05/09/2012 - 10:16] Vedovelli - adicionado o retorno do próprio container nos métodos prev e next, visando manter encadeamento.
