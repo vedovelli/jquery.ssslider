@@ -4,19 +4,16 @@ jQuery(document).ready(function($){
 		container 		= $('.panel_container'),
 		btn_group 		= $('.btn-group'),
 		nav_array 		= $('.navigation'),
-		ori_array 		= $('.orientation'),
 		prev 			= $('.prev'),
 		next 			= $('.next'),
 		resize 			= $('.container_btn_resize').find('button');
 	;
 
+	btn_group.button();
+
 	btn_group.on('click', '.navigation', function(){
 		index = nav_array.index(this);
 		container.ssslider('navigate', index);	
-	});
-
-	btn_group.on('click', '.orientation', function(){
-		container.ssslider('change_orientation', {'orientation': $(this).text()});
 	});
 
 	prev.on('click', function(){
@@ -41,7 +38,5 @@ jQuery(document).ready(function($){
 	 * Ex.: container.ssslider({orientation:'from_right'});
 	 */ 
 	container.ssslider({orientation:'from_right'});
-
-	$('.btn-group').button();
 
 });

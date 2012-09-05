@@ -4,7 +4,9 @@
 ;(function($){
 
 	// Scope variables
-	var _container, _children, _slider, _index = 0, _slider_top, _slider_left, _orientation = 'from_left';
+	var _container, _children, _slider, 
+		_index = 0, _slider_top, _slider_left, 
+		_orientation = 'from_left';
 
 	// Plugin methods. Taken from here: http://docs.jquery.com/Plugins/Authoring#Plugin_Methods
 	var methods = {
