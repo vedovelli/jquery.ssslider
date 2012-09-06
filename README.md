@@ -30,7 +30,9 @@ No seu JavaScript, inclua a jQuery e o código do plugin.
 
 E finalmente, em um arquivo .js separado ou no seu código *inline*, inicie o plugin.
 
-	$('#panel_container').ssslider();
+	jQuery(document).ready(function($){
+		$('#panel_container').ssslider();
+	});
 
 Existem parâmetros opcionais a serem passados no contrutor do slider, que indicam a direção que ele deve seguir.
 
