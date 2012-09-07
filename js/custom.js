@@ -45,11 +45,19 @@ jQuery(document).ready(function($){
 			this.$btn_group.button();
 
 			/* Slider initialization.
+			 *
 			 * Default orientation is "from_left".
 			 * Try the other 3 possible values: "from_right", "from_top" and "from_bottom"
 			 * Ex.: container.ssslider({orientation:'from_right'});
+			 *
+			 * Default behaviour is animated. Other possible value is static. If a wrong value
+			 * is passed, then aninated will be used.
+			 * Ex.: container.ssslider({behaviour:'static'});
 			 */ 
-			this.$container.ssslider({orientation:'from_right'});
+			this.$container.ssslider({
+				behaviour:'static',
+				orientation: 'from_right' // Has no effect since there will be no animation. Here only for ilustrational purpose.
+			});
 		}
 
 	};

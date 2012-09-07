@@ -6,18 +6,23 @@
 	// Scope variables
 	var _container, _children, _slider, 
 		_index = 0, _slider_top, _slider_left, 
-		_orientation = 'from_left';
+		_orientation = 'from_left', _behaviour = 'animated';
 
 	// Plugin methods. Taken from here: http://docs.jquery.com/Plugins/Authoring#Plugin_Methods
 	var methods = {
 
 		// Plugin initialization. Mandatory!
-		init: function(orientation){
+		init: function(config){
 			_container = $(this); // Inside this anonymous function, this is an HTML fragment, not jQuery obj
 			_children = _container.children(); // Get all container's children
 			_slider = $('<div class="$slider"></div>'); // Create the slider markup to be added to container
-			if( typeof orientation === 'object' ){ // Checks if received orientation is an object
-				_orientation = orientation.orientation; // Use the received information from object
+			if( typeof config === 'object' ){ // Checks if received config is an object
+				if(config.orientation){
+					_orientation = config.orientation; // Use the received information from object
+				}
+				if(config.behaviour){
+					_behaviour = config.behaviour;
+				}
 			}
 			_slider.css({ // Sets the base CSS for the slider
 				'position': 'absolute',
@@ -43,36 +48,44 @@
 			});
 
 			// This is necessary in case of container resizing. Keeps the selected pane selected.
-			switch(_orientation){
-				case 'from_top':
-					_children = $(_children.get().reverse());
-					_slider.css({
-						'height': ( container_height * _children.length ),
-						'top': -( (container_height * _children.length) - _container.css('height').replace('px','') )
-					});
-					break;
-				case 'from_right':
-					_slider.css({
-						'width': (container_width * _children.length),
-						'left': -(container_width*_index) || 0
-					});
-					break;
-				case 'from_bottom':
-					_slider.css({
-						'height': (container_height * _children.length),
-						'top': -(_index * container_height) || 0
-					});
-					break;
-				case 'from_left':
-					_children = $(_children.get().reverse());
-					_slider.css({
-						'width': ( container_width * _children.length ),
-						'left': -(( container_width * _children.length ) - container_width)
-					});
-					break;
-				default:
-					$.error( 'Orientation unknown. Possible values are "from_top", "from_right", "from_bottom" or "from_left"' );
-					break;
+			if(_behaviour === 'static'){
+				_children = $(_children.get().reverse());
+				_slider.css({
+					'width': ( container_width * _children.length ),
+					'left': -(( container_width * _children.length ) - container_width)
+				});
+			} else {
+				switch(_orientation){
+					case 'from_top':
+						_children = $(_children.get().reverse());
+						_slider.css({
+							'height': ( container_height * _children.length ),
+							'top': -( (container_height * _children.length) - _container.css('height').replace('px','') )
+						});
+						break;
+					case 'from_right':
+						_slider.css({
+							'width': (container_width * _children.length),
+							'left': -(container_width*_index) || 0
+						});
+						break;
+					case 'from_bottom':
+						_slider.css({
+							'height': (container_height * _children.length),
+							'top': -(_index * container_height) || 0
+						});
+						break;
+					case 'from_left':
+						_children = $(_children.get().reverse());
+						_slider.css({
+							'width': ( container_width * _children.length ),
+							'left': -(( container_width * _children.length ) - container_width)
+						});
+						break;
+					default:
+						$.error( 'Orientation unknown. Possible values are "from_top", "from_right", "from_bottom" or "from_left"' );
+						break;
+				}
 			}
 
 			// Holds slider top and left position for further use
@@ -94,23 +107,27 @@
 			;
 			_index = index; // Holds received index for further use.
 
-			// Do the proper animations
-			switch(_orientation){
-				case 'from_top':
-					_slider.animate({'top': _slider_top + (_index * container_height)});
-					break;
-				case 'from_right':
-					_slider.animate({'left': -(container_width*_index)});
-					break;
-				case 'from_bottom':
-					_slider.animate({'top': -(_index * container_height)});
-					break;
-				case 'from_left':
-					_slider.animate({'left': _slider_left + (_index * container_width)});
-					break;
-				default:
-					$.error( 'Orientation unknown. Possible values are "from_top", "from_right", "from_bottom" or "from_left"' );
-					break;
+			// Do the navigation
+			if(_behaviour === 'static'){
+				_slider.css({'left': _slider_left + (_index * container_width)});
+			} else {
+				switch(_orientation){
+					case 'from_top':
+						_slider.animate({'top': _slider_top + (_index * container_height)});
+						break;
+					case 'from_right':
+						_slider.animate({'left': -(container_width*_index)});
+						break;
+					case 'from_bottom':
+						_slider.animate({'top': -(_index * container_height)});
+						break;
+					case 'from_left':
+						_slider.animate({'left': _slider_left + (_index * container_width)});
+						break;
+					default:
+						$.error( 'Orientation unknown. Possible values are "from_top", "from_right", "from_bottom" or "from_left"' );
+						break;
+				}
 			}
 			return _container; // Keeps chainability
 		},
