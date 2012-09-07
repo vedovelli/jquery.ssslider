@@ -3,6 +3,7 @@
  */
 ;(function($){
 
+	'use strict';
 	// Scope variables
 	var _container, _children, _slider, 
 		_index = 0, _slider_top, _slider_left, 
@@ -27,7 +28,7 @@
 			_slider.css({ // Sets the base CSS for the slider
 				'position': 'absolute',
 				'left': 0,
-				'top': 0,
+				'top': 0
 			});
 			methods.resize(); // See next method
 			_container.html( _slider.html(_children) ); // Wraps all children (panes) inside the slider
@@ -37,8 +38,8 @@
 		// Must be called after container resizing. Also used during initialization process
 		resize: function(){
 			var // Holds container width and height for further use. Local variables.
-				container_width = parseInt(_container.css('width').replace('px','')),
-				container_height = parseInt(_container.css('height').replace('px',''))
+				container_width = parseInt(_container.css('width').replace('px',''), 0),
+				container_height = parseInt(_container.css('height').replace('px',''), 0)
 			;
 			_children.css({ // Apply proper CSS on children in order to resize them to match container's dimensions
 				'float': 'left',
@@ -89,8 +90,8 @@
 			}
 
 			// Holds slider top and left position for further use
-			_slider_top = parseInt(_slider.css('top').replace('px',''));
-			_slider_left = parseInt(_slider.css('left').replace('px',''));
+			_slider_top = parseInt(_slider.css('top').replace('px',''), 0);
+			_slider_left = parseInt(_slider.css('left').replace('px',''), 0);
 			return _container; // Keeps chainability
 		},
 
@@ -102,8 +103,8 @@
 				$.error( 'Index out of range' );	
 			} 
 			var  // Holds container width and height for further use. Local variables.
-				container_width = parseInt(_container.css('width').replace('px','')),
-				container_height = parseInt(_container.css('height').replace('px',''))
+				container_width = parseInt(_container.css('width').replace('px',''), 0),
+				container_height = parseInt(_container.css('height').replace('px',''), 0)
 			;
 			_index = index; // Holds received index for further use.
 
@@ -133,9 +134,11 @@
 		},
 		
 		next: function(){
-			if(!_container && !_children) return false; // Prevents method being called without plugin initialisation
+			if(!_container && !_children){
+				return false; // Prevents method being called without plugin initialisation
+			}
 			if( _index > -1 && _index < (_children.length-1) ){ // Calculates the range to find next
-				methods.navigate(_index+1)
+				methods.navigate(_index+1);
 			} else {
 				methods.navigate(0);
 			}
@@ -143,9 +146,11 @@
 		},
 
 		prev: function(){
-			if(!_container && !_children) return false; // Prevents method being called without plugin initialisation
+			if(!_container && !_children){
+				return false; // Prevents method being called without plugin initialisation	
+			}
 			if(_index > 0 && _index < _children.length){  // Calculates the range to find prev
-				methods.navigate(_index-1)
+				methods.navigate(_index-1);
 			} else {
 				methods.navigate(_children.length-1);
 			}
@@ -162,6 +167,6 @@
 		} else {
 			$.error( 'Method ' +  method + ' unknown' ); // Error triggered if none of the above happened
 		}    
-	}
+	};
 
-})(jQuery);
+})(window.jQuery);
