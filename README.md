@@ -56,6 +56,14 @@ Existem parâmetros opcionais a serem passados no contrutor do slider, que indic
 
 Caso nada seja passado, o padrão assumido é "from_left".
 
+O plugin também funciona sem qualquer animação durante a navegação. Basta passar no objeto de configuração, durante a iniciação do plugin, a seguinte informação:
+
+	$('#panel_container').ssslider({
+		behaviour: 'static'
+	});
+
+O comportamento padrão é o 'animated'. Caso um valor errado seja passado, o padrão é mantido e nenhum erro é mostrado. Ao utilizar o comportamento estático, não é necessário indicar a direção, pois nenhuma animação será executada.
+
 ## Navegação
 
 A navegação entre os painéis fica a sua escolha. Basta passar o índice do painel a ser mostrado e deixar o restante a cargo do plugin. Vale lembrar que o índice se inicia em 0 (zero).
@@ -94,6 +102,7 @@ Um exemplo pode ser encontrado na [seguinte URL](http://blog.vedovelli.com.br/ss
 ## Changelog
 
 - [05/09/2012 - 10:16] Vedovelli - adicionado o retorno do próprio container nos métodos prev e next, visando manter encadeamento.
+- [07/09/2012 - 14:14] Vedovelli - adicionado o comportamento estático (sem animações). O código do plugin foi verificado no JSHint e as correções sugeridas foram feitas.
 
 # English for the world domination! \o/
 
@@ -148,6 +157,14 @@ There are optional parameters to be passed in the constructor of the slider, whi
 	});
 
 If nothing is passed, the default is “from_left.”
+
+You can use the plugin without animations during navigation. Just pass in the config object, during plugin initialisation, the following:
+
+	$('#panel_container').ssslider({
+		behaviour: 'static'
+	});
+
+The default behaviour is 'animated'. If a wrong value is passed, the plugin will assume the default, which is 'animated' and no error will be thrown. If you chose to go static, even if you pass the orientation parameter, it will be ignored, because no animation will be shown.
 
 ## Navigation
 
