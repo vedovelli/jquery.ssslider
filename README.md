@@ -1,20 +1,20 @@
-**SSSlider - Super Simple Slider**
+#SSSlider - Super Simple Slider
 
 English version right after the portuguese one.
 
-# Motivação
+## Motivação
 
 Mais um plugin de slider? Sim! A motivação para o desenvolvimento do SSSlider veio da dificuldade em encontrar um plugin simples, focado em mostrar conteúdo. Na web há muitos sliders feitos para imagens e adaptados para receber outro tipo de conteúdo. Neste caso, o SSSlider é apenas para conteúdo.
 
-# Instruções para uso
+## Instruções para uso
 
-## Informação importante e licença de uso
+### Informação importante e licença de uso
 
 Este plugin está em ALPHA! Bugs podem ser encontrados e se vc corrigir algum, envie-nos uma mensagem. O ideal é fazer um fork no GitHub, corrigir e enviar um pull request.
 
 Quanto à licença, **ela não existe**. Vc pode fazer o que quiser com o código. Nenhum crédito é necessário. Apenas faça bom uso e se chegar a colocar no ar, mande o link para darmos uma olhada e ver se vc fez direitinho! =D
 
-## Aplicando o plugin ao markup
+### Aplicando o plugin ao markup
 
 O plugin necessita de um markup HTML simples. Basta seguir o exemplo abaixo, estilizando de acordo com sua preferência.
 
@@ -89,34 +89,34 @@ Caso seja necessário redimensionar o container, é preciso executar um método 
 		container.ssslider('resize'); // Apenas chamar o método 'resize' do plugin
 	});
 
-## Exemplo
+### Exemplo
 
 Um exemplo pode ser encontrado na [seguinte URL](http://blog.vedovelli.com.br/ssslider).
 
-## Colaboradores
+### Colaboradores
 - Fábio Vedovelli (@vedovelli)
 - Marcos Junior (@marcosgugs)
 
 **RIA Labs Desenvolvimento**
 
-## Changelog
+### Changelog
 
 - [05/09/2012 - 10:16] Vedovelli - adicionado o retorno do próprio container nos métodos prev e next, visando manter encadeamento.
 - [07/09/2012 - 14:14] Vedovelli - adicionado o comportamento estático (sem animações). O código do plugin foi verificado no JSHint e as correções sugeridas foram feitas.
 
-# English for the world domination! \o/
+## English for the world domination! \o/
 
-# Motivation
+## Motivation
 
 Another slider plugin? Yes! The motivation for the development of SSSlider came from the difficulty in finding a simple plugin, focused on showing content. On the web there are many sliders made for images and adapted to receive other content. In this case SSSlider is just for the content.
 
-# Important information and user’s license
+## Important information and user’s license
 
 This plugin is in ALPHA! Bugs can be found and if you fix one, send us a message. The ideal is to make a fork on GitHub, correct and send a pull request.
 
 As for the license, it does not exist. You can do whatever you want with the code. No credit is needed. Just make good use and get to put on the air, send me the link to take a look and see if you did right!
 
-## Applying the plugin
+### Applying the plugin
 
 The plugin requires a simple HTML markup. Just follow the example below, styling according to your preference.
 
@@ -166,7 +166,7 @@ You can use the plugin without animations during navigation. Just pass in the co
 
 The default behaviour is 'animated'. If a wrong value is passed, the plugin will assume the default, which is 'animated' and no error will be thrown. If you chose to go static, even if you pass the orientation parameter, it will be ignored, because no animation will be shown.
 
-## Navigation
+### Navigation
 
 Navigation between panels is at your choice. Just pass the index of the panel to be shown and leave the rest by the plugin. Remember that the index starts at 0 (zero).
 
@@ -179,7 +179,7 @@ Moreover, one can have a simpler navigation, with links to “next” and “pre
 
 Navigation is circular, that is, when you get to the last panel and the “next” is triggered, the panels back to the beginning.
 
-## Resize the container
+### Resize the container
 
 If necessary resize the container, you need to execute a method in the plugin, just after the change of dimensions. This is because the internal panels are resized dynamically, inheriting dimensions of parent.
 
@@ -199,4 +199,4 @@ Collaborators
 - Fábio Vedovelli (@vedovelli)
 - Marcos Junior (@marcosgugs)
 
-Translation to english courtesy of Ricardo Parente (http://ricardo.parente.us/ssslider-super-simple-slider/)
+Translation to english courtesy of [Ricardo Parente](http://ricardo.parente.us/ssslider-super-simple-slider/)
