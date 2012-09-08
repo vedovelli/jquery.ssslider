@@ -63,7 +63,7 @@
 						_children = $(_children.get().reverse());
 						_slider.css({
 							'height': ( container_height * _panel_count ),
-							'top': -( container_height * ( _panel_counth - 1) )
+							'top': -( container_height * ( _panel_count - 1) )
 						});
 						break;
 					case 'from_right':
@@ -107,7 +107,6 @@
 			var  // Holds container width and height for further use. Local variables.
 				container_width = _container.width(),
 				container_height = _container.height();
-			;
 			_index = index; // Holds received index for further use.
 
 			// Do the navigation
@@ -137,7 +136,7 @@
 
 		next: function(){
 			if(!_initialized){
-				return false; // Prevents method being called without plugin initialisation
+				$.error( 'Initialization needed. Use $(<selector>).ssslider();' );
 			}
 			if( _index > -1 && _index < (_panel_count-1) ){ // Calculates the range to find next
 				methods.navigate(_index+1);
@@ -149,7 +148,7 @@
 
 		prev: function(){
 			if(!_initialized){
-				return false; // Prevents method being called without plugin initialisation	
+				$.error( 'Initialization needed. Use $(<selector>).ssslider();' );
 			}
 			if(_index > 0 && _index < _panel_count){  // Calculates the range to find prev
 				methods.navigate(_index-1);
