@@ -5,7 +5,7 @@
 
 	'use strict';
 	// Scope variables
-	var _container, _children, _slides_count, _slider, 
+	var _container, _children, _panel_count, _slider, 
 		_index = 0, _initialized = false, _slider_top, _slider_left, 
 		_orientation = 'from_left', _behaviour = 'animated';
 
@@ -16,7 +16,7 @@
 		init: function(config){
 			_container = $(this); // Inside this anonymous function, this is an HTML fragment, not jQuery obj
 			_children = _container.children(); // Get all container's children
-			_slides_count = _children.length, // Keep number os slides cached
+			_panel_count = _children.length, // Keep number os slides cached
 			_slider = $('<div class="$slider"></div>'); // Create the slider markup to be added to container
 			if( typeof config === 'object' ){ // Checks if received config is an object
 				if(config.orientation){
@@ -54,35 +54,35 @@
 			if(_behaviour === 'static'){
 				_children = $(_children.get().reverse());
 				_slider.css({
-					'width': ( container_width * _slides_count ),
-					'left': -( container_width * (_slides_count - 1) )
+					'width': ( container_width * _panel_count ),
+					'left': -( container_width * (_panel_count - 1) )
 				});
 			} else {
 				switch(_orientation){
 					case 'from_top':
 						_children = $(_children.get().reverse());
 						_slider.css({
-							'height': ( container_height * _slides_count ),
-							'top': -( container_height * ( _slides_counth - 1) )
+							'height': ( container_height * _panel_count ),
+							'top': -( container_height * ( _panel_counth - 1) )
 						});
 						break;
 					case 'from_right':
 						_slider.css({
-							'width': (container_width * _slides_count),
+							'width': (container_width * _panel_count),
 							'left': -(container_width*_index) || 0
 						});
 						break;
 					case 'from_bottom':
 						_slider.css({
-							'height': (container_height * _slides_count),
+							'height': (container_height * _panel_count),
 							'top': -(_index * container_height) || 0
 						});
 						break;
 					case 'from_left':
 						_children = $(_children.get().reverse());
 						_slider.css({
-							'width': ( container_width * _slides_count ),
-							'left': -(( container_width * _slides_count ) - container_width)
+							'width': ( container_width * _panel_count ),
+							'left': -(( container_width * _panel_count ) - container_width)
 						});
 						break;
 					default:
@@ -101,7 +101,7 @@
 			if(!_initialized){ // Error triggered if method is called before plugin initialisation
 				$.error( 'Initialization needed. Use $(<selector>).ssslider();' );
 			}
-			if(index < 0 || index > (_slides_count-1)){ // Error triggered if the passed index is out of range
+			if(index < 0 || index > (_panel_count-1)){ // Error triggered if the passed index is out of range
 				$.error( 'Index out of range' );	
 			} 
 			var  // Holds container width and height for further use. Local variables.
@@ -139,7 +139,7 @@
 			if(!_initialized){
 				return false; // Prevents method being called without plugin initialisation
 			}
-			if( _index > -1 && _index < (_slides_count-1) ){ // Calculates the range to find next
+			if( _index > -1 && _index < (_panel_count-1) ){ // Calculates the range to find next
 				methods.navigate(_index+1);
 			} else {
 				methods.navigate(0);
@@ -151,10 +151,10 @@
 			if(!_initialized){
 				return false; // Prevents method being called without plugin initialisation	
 			}
-			if(_index > 0 && _index < _slides_count){  // Calculates the range to find prev
+			if(_index > 0 && _index < _panel_count){  // Calculates the range to find prev
 				methods.navigate(_index-1);
 			} else {
-				methods.navigate(_slides_count-1);
+				methods.navigate(_panel_count-1);
 			}
 			return _container; // Keeps chainability
 		}

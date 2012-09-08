@@ -55,7 +55,7 @@ jQuery(document).ready(function($){
 			 * Ex.: container.ssslider({behaviour:'static'});
 			 */ 
 			this.$container.ssslider({
-				behaviour:'static',
+				behaviour:'animated',
 				orientation: 'from_right' // Has no effect since there will be no animation. Here only for ilustrational purpose.
 			});
 		}
