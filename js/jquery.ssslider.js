@@ -5,8 +5,8 @@
 
 	'use strict';
 	// Scope variables
-	var _container, _children, _slider, 
-		_index = 0, _slider_top, _slider_left, 
+	var _container, _children, _slides_count, _slider, 
+		_index = 0, _initialized = false, _slider_top, _slider_left, 
 		_orientation = 'from_left', _behaviour = 'animated';
 
 	// Plugin methods. Taken from here: http://docs.jquery.com/Plugins/Authoring#Plugin_Methods
@@ -16,6 +16,7 @@
 		init: function(config){
 			_container = $(this); // Inside this anonymous function, this is an HTML fragment, not jQuery obj
 			_children = _container.children(); // Get all container's children
+			_slides_count = _children.length, // Keep number os slides cached
 			_slider = $('<div class="$slider"></div>'); // Create the slider markup to be added to container
 			if( typeof config === 'object' ){ // Checks if received config is an object
 				if(config.orientation){
@@ -32,15 +33,16 @@
 			});
 			methods.resize(); // See next method
 			_container.html( _slider.html(_children) ); // Wraps all children (panes) inside the slider
+			_initialized = true;
 			return _container; // Keeps chainability
 		},
 
 		// Must be called after container resizing. Also used during initialization process
 		resize: function(){
 			var // Holds container width and height for further use. Local variables.
-				container_width = parseInt(_container.css('width').replace('px',''), 0),
-				container_height = parseInt(_container.css('height').replace('px',''), 0)
-			;
+				container_width = _container.width(),
+				container_height = _container.height();
+
 			_children.css({ // Apply proper CSS on children in order to resize them to match container's dimensions
 				'float': 'left',
 				'overflow': 'auto',
@@ -52,35 +54,35 @@
 			if(_behaviour === 'static'){
 				_children = $(_children.get().reverse());
 				_slider.css({
-					'width': ( container_width * _children.length ),
-					'left': -(( container_width * _children.length ) - container_width)
+					'width': ( container_width * _slides_count ),
+					'left': -( container_width * (_slides_count - 1) )
 				});
 			} else {
 				switch(_orientation){
 					case 'from_top':
 						_children = $(_children.get().reverse());
 						_slider.css({
-							'height': ( container_height * _children.length ),
-							'top': -( (container_height * _children.length) - _container.css('height').replace('px','') )
+							'height': ( container_height * _slides_count ),
+							'top': -( container_height * ( _slides_counth - 1) )
 						});
 						break;
 					case 'from_right':
 						_slider.css({
-							'width': (container_width * _children.length),
+							'width': (container_width * _slides_count),
 							'left': -(container_width*_index) || 0
 						});
 						break;
 					case 'from_bottom':
 						_slider.css({
-							'height': (container_height * _children.length),
+							'height': (container_height * _slides_count),
 							'top': -(_index * container_height) || 0
 						});
 						break;
 					case 'from_left':
 						_children = $(_children.get().reverse());
 						_slider.css({
-							'width': ( container_width * _children.length ),
-							'left': -(( container_width * _children.length ) - container_width)
+							'width': ( container_width * _slides_count ),
+							'left': -(( container_width * _slides_count ) - container_width)
 						});
 						break;
 					default:
@@ -90,21 +92,21 @@
 			}
 
 			// Holds slider top and left position for further use
-			_slider_top = parseInt(_slider.css('top').replace('px',''), 0);
-			_slider_left = parseInt(_slider.css('left').replace('px',''), 0);
+			_slider_top = parseInt(_slider.css('top').replace('px',''), 10);
+			_slider_left = parseInt(_slider.css('left').replace('px',''), 10);
 			return _container; // Keeps chainability
 		},
 
 		navigate: function(index){
-			if(!_container){ // Error triggered if method is called before plugin initialisation
+			if(!_initialized){ // Error triggered if method is called before plugin initialisation
 				$.error( 'Initialization needed. Use $(<selector>).ssslider();' );
 			}
-			if(index < 0 || index > (_children.length-1)){ // Error triggered if the passed index is out of range
+			if(index < 0 || index > (_slides_count-1)){ // Error triggered if the passed index is out of range
 				$.error( 'Index out of range' );	
 			} 
 			var  // Holds container width and height for further use. Local variables.
-				container_width = parseInt(_container.css('width').replace('px',''), 0),
-				container_height = parseInt(_container.css('height').replace('px',''), 0)
+				container_width = _container.width(),
+				container_height = _container.height();
 			;
 			_index = index; // Holds received index for further use.
 
@@ -132,12 +134,12 @@
 			}
 			return _container; // Keeps chainability
 		},
-		
+
 		next: function(){
-			if(!_container && !_children){
+			if(!_initialized){
 				return false; // Prevents method being called without plugin initialisation
 			}
-			if( _index > -1 && _index < (_children.length-1) ){ // Calculates the range to find next
+			if( _index > -1 && _index < (_slides_count-1) ){ // Calculates the range to find next
 				methods.navigate(_index+1);
 			} else {
 				methods.navigate(0);
@@ -146,13 +148,13 @@
 		},
 
 		prev: function(){
-			if(!_container && !_children){
+			if(!_initialized){
 				return false; // Prevents method being called without plugin initialisation	
 			}
-			if(_index > 0 && _index < _children.length){  // Calculates the range to find prev
+			if(_index > 0 && _index < _slides_count){  // Calculates the range to find prev
 				methods.navigate(_index-1);
 			} else {
-				methods.navigate(_children.length-1);
+				methods.navigate(_slides_count-1);
 			}
 			return _container; // Keeps chainability
 		}
