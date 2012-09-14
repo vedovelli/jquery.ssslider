@@ -26,7 +26,10 @@
 					_behaviour = config.behaviour;
 				}
 			}
-						_container.css({'position':'relative'}); // Ensures container is relative positioned in order to keep absolute positioned children inside the container
+			_container.css({
+			'position':'relative',
+			'overflow': 'hidden'
+			}); // Ensures container is relative positioned in order to keep absolute positioned children inside the container
 			_slider.css({ // Sets the base CSS for the slider
 				'position': 'absolute',
 				'left': 0,
