@@ -32,10 +32,19 @@ jQuery(document).ready(function($){
 		},
 
 		doresize: function(){
-			App.$container.css({
-				'width':'200px',
-				'height':'500px'
-			});
+			if(App.$container.width() === 200){
+				App.$container.css({
+					'width':'600px',
+					'height':'300px'
+				});
+				App.$resize.text('Resize the container');
+			} else {
+				App.$container.css({
+					'width':'200px',
+					'height':'500px'
+				});				
+				App.$resize.text('Revert');
+			}
 			App.$container.ssslider('resize');
 		},
 
