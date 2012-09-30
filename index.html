@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Jquery.ssslider by vedovelli</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Jquery.ssslider</h1>
+          <h2>Um slider muito simples de ser utilizado</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/vedovelli/jquery.ssslider/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/vedovelli/jquery.ssslider/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/vedovelli/jquery.ssslider" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>SSSlider - Super Simple Slider</h1>
+
+<p>English version right after the portuguese one.</p>
+
+<h2>Motivação</h2>
+
+<p>Mais um plugin de slider? Sim! A motivação para o desenvolvimento do SSSlider veio da dificuldade em encontrar um plugin simples, focado em mostrar conteúdo. Na web há muitos sliders feitos para imagens e adaptados para receber outro tipo de conteúdo. Neste caso, o SSSlider é apenas para conteúdo.</p>
+
+<h2>Instruções para uso</h2>
+
+<h3>Informação importante e licença de uso</h3>
+
+<p>Este plugin está em ALPHA! Bugs podem ser encontrados e se vc corrigir algum, envie-nos uma mensagem. O ideal é fazer um fork no GitHub, corrigir e enviar um pull request.</p>
+
+<p>Quanto à licença, <strong>ela não existe</strong>. Vc pode fazer o que quiser com o código. Nenhum crédito é necessário. Apenas faça bom uso e se chegar a colocar no ar, mande o link para darmos uma olhada e ver se vc fez direitinho! =D</p>
+
+<h3>Aplicando o plugin ao markup</h3>
+
+<p>O plugin necessita de um markup HTML simples. Basta seguir o exemplo abaixo, estilizando de acordo com sua preferência.</p>
+
+<pre><code>&lt;div id="panel_container"&gt;
+    &lt;div&gt;&lt;p&gt;1&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;p&gt;2&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;p&gt;3&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;p&gt;4&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>No seu JavaScript, inclua a jQuery e o código do plugin.</p>
+
+<pre><code>&lt;script type="text/javascript" src="js/jquery-1.8.1.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/jquery.ssslider.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p>E finalmente, em um arquivo .js separado ou no seu código <em>inline</em>, inicie o plugin.</p>
+
+<pre><code>jQuery(document).ready(function($){
+    $('#panel_container').ssslider();
+});
+</code></pre>
+
+<p>Existem parâmetros opcionais a serem passados no contrutor do slider, que indicam a direção que ele deve seguir.</p>
+
+<pre><code>$('#panel_container').ssslider({
+    orientation: 'from_top'
+});
+
+$('#panel_container').ssslider({
+    orientation: 'from_right'
+});
+
+$('#panel_container').ssslider({
+    orientation: 'from_bottom'
+});
+
+$('#panel_container').ssslider({
+    orientation: 'from_left'
+});
+</code></pre>
+
+<p>Caso nada seja passado, o padrão assumido é "from_left".</p>
+
+<p>O plugin também funciona sem qualquer animação durante a navegação. Basta passar no objeto de configuração, durante a iniciação do plugin, a seguinte informação:</p>
+
+<pre><code>$('#panel_container').ssslider({
+    behaviour: 'static'
+});
+</code></pre>
+
+<p>O comportamento padrão é o 'animated'. Caso um valor errado seja passado, o padrão é mantido e nenhum erro é mostrado. Ao utilizar o comportamento estático, não é necessário indicar a direção, pois nenhuma animação será executada.</p>
+
+<h2>Navegação</h2>
+
+<p>A navegação entre os painéis fica a sua escolha. Basta passar o índice do painel a ser mostrado e deixar o restante a cargo do plugin. Vale lembrar que o índice se inicia em 0 (zero).</p>
+
+<pre><code>$('#panel_container').ssslider('navigate', 1) // Levará ao segundo painel
+</code></pre>
+
+<p>Além disso, pode-se ter uma navegação mais simples, com links de "próximo" e "anterior". Vejamos:</p>
+
+<pre><code>$('#panel_container').ssslider('next') // próximo painel
+$('#panel_container').ssslider('prev') // painel anterior
+</code></pre>
+
+<p>A navegação é circular, ou seja, quando chegar ao último painel e o "próximo" for acionado, os painéis voltarão ao início.</p>
+
+<h2>Redimensionar o container</h2>
+
+<p>Caso seja necessário redimensionar o container, é preciso executar um método no plugin, logo após a mudança das dimensões. Isso porque os painéis internos são redimensionados dinamicamente, herdando as dimensões do pai.</p>
+
+<pre><code>resize.on('click', function(){
+    container.css({
+        'width':'200px',
+        'height':'500px'
+    });
+    container.ssslider('resize'); // Apenas chamar o método 'resize' do plugin
+});
+</code></pre>
+
+<h3>Exemplo</h3>
+
+<p>Um exemplo pode ser encontrado na <a href="http://blog.vedovelli.com.br/ssslider">seguinte URL</a>.</p>
+
+<h3>Colaboradores</h3>
+
+<ul>
+<li>Fábio Vedovelli (<a href="https://github.com/vedovelli" class="user-mention">@vedovelli</a>)</li>
+<li>Marcos Junior (<a href="https://github.com/marcosgugs" class="user-mention">@marcosgugs</a>)</li>
+</ul><p><strong>RIA Labs Desenvolvimento</strong></p>
+
+<h3>Changelog</h3>
+
+<ul>
+<li>[05/09/2012 - 10:16] Vedovelli - adicionado o retorno do próprio container nos métodos prev e next, visando manter encadeamento.</li>
+<li>[07/09/2012 - 14:14] Vedovelli - adicionado o comportamento estático (sem animações). O código do plugin foi verificado no JSHint e as correções sugeridas foram feitas.</li>
+</ul><h2>English for the world domination! \o/</h2>
+
+<h2>Motivation</h2>
+
+<p>Another slider plugin? Yes! The motivation for the development of SSSlider came from the difficulty in finding a simple plugin, focused on showing content. On the web there are many sliders made for images and adapted to receive other content. In this case SSSlider is just for the content.</p>
+
+<h2>Important information and user’s license</h2>
+
+<p>This plugin is in ALPHA! Bugs can be found and if you fix one, send us a message. The ideal is to make a fork on GitHub, correct and send a pull request.</p>
+
+<p>As for the license, it does not exist. You can do whatever you want with the code. No credit is needed. Just make good use and get to put on the air, send me the link to take a look and see if you did right!</p>
+
+<h3>Applying the plugin</h3>
+
+<p>The plugin requires a simple HTML markup. Just follow the example below, styling according to your preference.</p>
+
+<pre><code>&lt;div id="panel_container"&gt;
+    &lt;div&gt;&lt;p&gt;1&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;p&gt;2&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;p&gt;3&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;p&gt;4&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>In your JavaScript, include jQuery and the plugin code.</p>
+
+<pre><code>&lt;script type="text/javascript" src="js/jquery-1.8.1.min.js"&gt;&lt;/script&gt;&lt;code&gt;
+&lt;script type="text/javascript" src="js/jquery.ssslider.js"&gt;&lt;/script&gt;&lt;/code&gt;
+</code></pre>
+
+<p>And finally, in a separate .js file or inline in your code, start the plugin.</p>
+
+<pre><code>jQuery(document).ready(function($){
+    $('#panel_container').ssslider();
+});
+</code></pre>
+
+<p>There are optional parameters to be passed in the constructor of the slider, which indicate the direction it should take.</p>
+
+<pre><code>$('#panel_container').ssslider({
+    orientation: 'from_top'
+});
+
+$('#panel_container').ssslider({
+    orientation: 'from_right'
+});
+
+$('#panel_container').ssslider({
+    orientation: 'from_bottom'
+});
+
+$('#panel_container').ssslider({
+    orientation: 'from_left'
+});
+</code></pre>
+
+<p>If nothing is passed, the default is “from_left.”</p>
+
+<p>You can use the plugin without animations during navigation. Just pass in the config object, during plugin initialisation, the following:</p>
+
+<pre><code>$('#panel_container').ssslider({
+    behaviour: 'static'
+});
+</code></pre>
+
+<p>The default behaviour is 'animated'. If a wrong value is passed, the plugin will assume the default, which is 'animated' and no error will be thrown. If you chose to go static, even if you pass the orientation parameter, it will be ignored, because no animation will be shown.</p>
+
+<h3>Navigation</h3>
+
+<p>Navigation between panels is at your choice. Just pass the index of the panel to be shown and leave the rest by the plugin. Remember that the index starts at 0 (zero).</p>
+
+<pre><code>$('#panel_container').ssslider('navigate', 1) // will take to the second panel
+</code></pre>
+
+<p>Moreover, one can have a simpler navigation, with links to “next” and “previous”. Consider:</p>
+
+<pre><code>$('#panel_container').ssslider('next') // next panel
+$('#panel_container').ssslider('prev') // // previous panel
+</code></pre>
+
+<p>Navigation is circular, that is, when you get to the last panel and the “next” is triggered, the panels back to the beginning.</p>
+
+<h3>Resize the container</h3>
+
+<p>If necessary resize the container, you need to execute a method in the plugin, just after the change of dimensions. This is because the internal panels are resized dynamically, inheriting dimensions of parent.</p>
+
+<pre><code>resize.on('click', function(){
+    container.css({
+        'width':'200px',
+        'height':'500px'
+    });
+    container.ssslider('resize'); // Apenas chamar o método 'resize' do plugin
+});
+</code></pre>
+
+<p>Example:</p>
+
+<p>An example of this plugin may be <a href="http://blog.vedovelli.com.br/ssslider">found here</a>.</p>
+
+<p>Collaborators</p>
+
+<ul>
+<li>Fábio Vedovelli (<a href="https://github.com/vedovelli" class="user-mention">@vedovelli</a>)</li>
+<li>Marcos Junior (<a href="https://github.com/marcosgugs" class="user-mention">@marcosgugs</a>)</li>
+</ul><p>Translation to english courtesy of <a href="http://ricardo.parente.us/ssslider-super-simple-slider/">Ricardo Parente</a></p>
+        </section>
+
+        <footer>
+          Jquery.ssslider is maintained by <a href="https://github.com/vedovelli">vedovelli</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
